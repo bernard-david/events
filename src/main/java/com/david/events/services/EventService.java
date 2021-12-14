@@ -6,18 +6,22 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.david.events.models.Event;
+import com.david.events.models.Message;
 import com.david.events.models.User;
 import com.david.events.repositories.EventRepository;
+import com.david.events.repositories.MessageRepository;
 
 @Service
 public class EventService {
 
 	private final EventRepository eventRepo;
+	private final MessageRepository messageRepo;
 	private final UserService userServ;
 	
-	public EventService(EventRepository eventRepo, UserService userServ) {
+	public EventService(EventRepository eventRepo, UserService userServ, MessageRepository messageRepo) {
 		this.eventRepo = eventRepo;
 		this.userServ = userServ;
+		this.messageRepo = messageRepo;
 	}
 	
 	//gets all events in a user's state
@@ -86,6 +90,13 @@ public class EventService {
 		
 		return thisEvent.getUsers().size();
 	}
+	
+	//create a message
+	public Message createMessage(Message message) {
+		return messageRepo.save(message);
+	}
+	
+	//gets all messages
 }
 
 

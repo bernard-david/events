@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -58,13 +59,8 @@ public class Event {
     )
     private List<User> users;
     
-    //Setting up relationship with events and messages
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-    		name = "messages",
-    		joinColumns = @JoinColumn(name = "event_id"),
-    		inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
+    //Setting up relationship with event and messages
+    @OneToMany(mappedBy="event", fetch = FetchType.LAZY)
     private List<Message> messages;
     
     //Set Relationship for one host 

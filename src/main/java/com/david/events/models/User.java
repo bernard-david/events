@@ -70,13 +70,8 @@ public class User {
     )
     private List<Event> events;
     
-    //Setting up relationship with events and messages
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-    		name = "messages",
-    		joinColumns = @JoinColumn(name = "user_id"),
-    		inverseJoinColumns = @JoinColumn(name = "event_id")
-    )
+    //Setting up relationship with user and messages
+    @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
     private List<Message> messages;
     
     //setup relationship for host with many events
