@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.david.events.models.Event;
 import com.david.events.models.LoginUser;
+import com.david.events.models.Message;
 import com.david.events.models.User;
 import com.david.events.services.EventService;
 import com.david.events.services.UserService;
@@ -165,6 +166,17 @@ public class HomeController {
     			return "redirect:/";
     		}
     }
+    //################# YOU LEFT OFF HERE
+    //create new message
+//    @PostMapping("/messages/new")
+//    public String createMessage(@Valid @ModelAttribute("newMessage") Message message, BindingResult result, Model model, HttpSession session) {
+////    		if(result.hasErrors()) {
+////    			return "events/welcome.jsp";
+////    		} else {
+////    			eventServ.createEvent(event);
+////    			return "redirect:/events";
+////    		}
+//    }
 }
 
 

@@ -37,8 +37,16 @@
 		</div>
 		<div class="w-50 p-3">
 			<h3>Message Wall</h3>
-			<br />
-			
+			<p>Messages will go here</p>
+			<form:form actions="messages/new" method="post" modelAttribute="newMessage">
+				<div class="form-group">
+		            <label>Add Comment:</label>
+		            <form:input path="comment" class="form-control" />
+		            <form:errors path="comment" class="text-danger" />
+		   		</div>
+		   		<form:hidden path="user" value="${user.id}"/>
+		   		<form:hidden path="event" value="${event.id}"/>
+			</form:form>
 		</div>
 	</div>
 </body>

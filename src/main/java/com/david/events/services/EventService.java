@@ -97,6 +97,9 @@ public class EventService {
 	}
 	
 	//gets all messages
+	public List<Message> eventMessages(Long eventId) {
+		return (List<Message>) messageRepo.findAll(); 
+	}
 }
 
 
