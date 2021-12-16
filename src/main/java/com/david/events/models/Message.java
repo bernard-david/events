@@ -25,7 +25,7 @@ public class Message {
     private Long id;
 	
 	@NotEmpty(message="Message is required!")
-	@Size(min=2, max=200, message="Message need to be between 2 and 200 characters.")
+	@Size(min=1, max=200, message="Message need to be between 1 and 200 characters.")
 	private String comment;
 	
     @Column(updatable=false)

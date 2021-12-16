@@ -93,6 +93,7 @@ public class EventService {
 	
 	//create a message
 	public Message createMessage(Message message) {
+		System.out.println("I am in the service");
 		return messageRepo.save(message);
 	}
 	

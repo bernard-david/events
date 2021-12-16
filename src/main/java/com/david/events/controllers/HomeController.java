@@ -2,6 +2,8 @@ package com.david.events.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -157,26 +159,35 @@ public class HomeController {
     @GetMapping("/events/{id}")
     public String showEvent(@PathVariable("id") Long id, Model model, HttpSession session) {
     		if (session.getAttribute("user_id") != null) {
+    			//gets the data for the specific event then inserts the data into a model attribute
     			Event event = eventServ.findEvent(id);
-    			Integer numUsers = eventServ.numOfUsers(id);
     			model.addAttribute("event", event);
+    			session.setAttribute("eventId", event.getId());
+    			//gets the data for the number of users then inserts the data into a model attribute
+    			Integer numUsers = eventServ.numOfUsers(id);
     			model.addAttribute("numUsers", numUsers);
+    			//attribute that has a new instance of message ready to go
+    			model.addAttribute("newMessage", new Message());
+    			//gets the user from session
+    	    	model.addAttribute("user", userServ.findUser((Long) session.getAttribute("user_id")));
     			return "events/showone.jsp";
     		} else {
     			return "redirect:/";
     		}
     }
-    //################# YOU LEFT OFF HERE
+    
     //create new message
-//    @PostMapping("/messages/new")
-//    public String createMessage(@Valid @ModelAttribute("newMessage") Message message, BindingResult result, Model model, HttpSession session) {
-////    		if(result.hasErrors()) {
-////    			return "events/welcome.jsp";
-////    		} else {
-////    			eventServ.createEvent(event);
-////    			return "redirect:/events";
-////    		}
-//    }
+    @PostMapping("/events/messages/new")
+    public String createMessage(@Valid @ModelAttribute("newMessage") Message message, BindingResult result, Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+    		if(result.hasErrors()) {
+    			System.out.println("I am in the controller with errors");
+    			return "redirect/events/{}";
+    		} else {
+    			eventServ.createMessage(message);
+    			System.out.println("I am in the controller");
+    			return "redirect:/events";
+    		}
+    }
 }
 
 
